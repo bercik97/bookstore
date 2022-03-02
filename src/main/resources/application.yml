@@ -1,0 +1,17 @@
+spring:
+
+  datasource:
+    url: jdbc:h2:~/bookstore
+    username: admin
+    password:
+    driverClassName: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddlAuto: create-drop
+    openInView: false
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
