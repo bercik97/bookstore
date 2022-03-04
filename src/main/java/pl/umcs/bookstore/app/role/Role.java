@@ -11,16 +11,16 @@ import javax.persistence.Table;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleEntity extends BaseEntity {
+public class Role extends BaseEntity {
 
     private String role;
 
-    public RoleEntity(long id, String role) {
+    public Role(long id, String role) {
         super(id, ZonedDateTime.now());
         this.role = role;
     }

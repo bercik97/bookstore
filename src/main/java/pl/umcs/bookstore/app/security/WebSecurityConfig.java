@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import pl.umcs.bookstore.app.role.RoleType;
 
 @Configuration
 @EnableWebSecurity
@@ -21,8 +22,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/register", "/login").permitAll()
-                .antMatchers("/user*").hasRole("USER")
-                .antMatchers("/admin*").hasRole("ADMIN")
+                .antMatchers("/user*").hasRole(RoleType.ROLE_USER.getNameWithoutPrefix())
+                .antMatchers("/admin*").hasRole(RoleType.ROLE_ADMIN.getNameWithoutPrefix())
                 .anyRequest().authenticated()
             .and()
                 .formLogin()

@@ -4,7 +4,9 @@ import org.springframework.data.repository.Repository;
 
 import java.util.Optional;
 
-public interface UserRepository extends Repository<UserEntity, Long> {
+public interface UserRepository extends Repository<User, Long> {
 
-    Optional<UserEntity> findByUsername(String username);
+    void save(User user);
+
+    Optional<User> findByUsername(String username);
 }

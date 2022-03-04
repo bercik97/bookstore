@@ -26,8 +26,7 @@
                                         Nazwa użytkownika
                                     </label>
                                     <div class="mt-1">
-                                        <input id="username" type="text" th:field="*{username}" required
-                                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <input id="username" type="text" th:field="*{username}" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     </div>
                                     <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></p>
                                     <div th:unless="${#fields.hasErrors('username')}"></div>
@@ -38,8 +37,7 @@
                                         Hasło
                                     </label>
                                     <div class="mt-1">
-                                        <input id="password" type="password" th:field="*{password}" required
-                                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <input id="password" type="password" th:field="*{password}" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     </div>
                                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></p>
                                     <div th:unless="${#fields.hasErrors('password')}"></div>
@@ -50,15 +48,13 @@
                                         Potwierdzenie hasła
                                     </label>
                                     <div class="mt-1">
-                                        <input id="rePassword" type="password" th:field="*{rePassword}" required
-                                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <input id="rePassword" type="password" th:field="*{rePassword}" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     </div>
                                     <p th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}" class="alert alert-danger"></p>
                                 </div>
 
                                 <div>
-                                    <button type="submit"
-                                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Zarejestruj
                                     </button>
                                 </div>
@@ -69,7 +65,7 @@
                 </div>
             </div>
             <div style="width: 50%; position: absolute; right: 0; height: 100%;">
-                <img class="inset-0 h-full w-full object-cover" src="#" th:src="@{/img/quizzes.jpeg}" alt="Bookstore background">
+                <img class="inset-0 h-full w-full object-cover" src="#" th:src="@{/img/bookstore.jpeg}" alt="Bookstore background">
             </div>
         </div>
     </div>

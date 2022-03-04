@@ -1,17 +1,17 @@
 spring:
 
   datasource:
-    url: jdbc:h2:~/bookstore
-    username: admin
-    password:
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/bookstore
+    username: postgres
+    password: admin
+    driverClassName: org.postgresql.Driver
 
   jpa:
     hibernate:
       ddlAuto: create-drop
     openInView: false
+    defer-datasource-initialization: true
 
-  h2:
-    console:
-      enabled: true
-      path: /h2
+  sql:
+    init:
+      mode: always
