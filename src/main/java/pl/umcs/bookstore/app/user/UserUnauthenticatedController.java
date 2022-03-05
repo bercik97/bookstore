@@ -7,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.umcs.bookstore.app.security.dto.LoginDto;
 import pl.umcs.bookstore.app.user.domain.UserFacade;
 import pl.umcs.bookstore.app.user.domain.dto.CreateUserDto;
 
@@ -16,12 +15,6 @@ import pl.umcs.bookstore.app.user.domain.dto.CreateUserDto;
 class UserUnauthenticatedController {
 
     private final UserFacade facade;
-
-    @GetMapping(value = {"/", "/login"})
-    public String loginPage(Model model) {
-        model.addAttribute("loginDto", new LoginDto());
-        return "unauthenticated/login";
-    }
 
     @GetMapping("/register")
     public String registerPage(Model model) {

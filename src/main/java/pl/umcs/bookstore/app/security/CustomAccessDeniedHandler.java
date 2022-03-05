@@ -14,11 +14,9 @@ import java.io.IOException;
 class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            log.warn("User {} attempted to access the protected URL {}", auth.getName(), request.getRequestURL());
-        }
-        response.sendRedirect(request.getContextPath() + "/access-denied");
+        log.warn("User {} attempted to access the protected URL {}", auth.getName(), request.getRequestURL());
+        response.sendRedirect(request.getContextPath() + "/bookstore");
     }
 }

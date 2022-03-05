@@ -1,17 +1,28 @@
 package pl.umcs.bookstore.app.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.umcs.bookstore.app.role.RoleType;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final UserDetailsServiceImpl userDetailsService;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+    }
 
     @Override
     public void configure(WebSecurity web) {
@@ -21,22 +32,21 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/register", "/login").permitAll()
-                .antMatchers("/user*").hasRole(RoleType.ROLE_USER.getNameWithoutPrefix())
-                .antMatchers("/admin*").hasRole(RoleType.ROLE_ADMIN.getNameWithoutPrefix())
+                .antMatchers("/", "/register", "/login").not().authenticated()
+                .antMatchers("/admin-panel*").hasRole(RoleType.ROLE_ADMIN.getNameWithoutPrefix())
                 .anyRequest().authenticated()
             .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureForwardUrl("/login")
                 .successHandler(new CustomAuthenticationSuccessHandler())
-                .usernameParameter("login")
             .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+                .exceptionHandling()
+                .accessDeniedHandler(new CustomAccessDeniedHandler());
     }
 
     @Bean
-    public AccessDeniedHandler accessDeniedHandler() {
-        return new CustomAccessDeniedHandler();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

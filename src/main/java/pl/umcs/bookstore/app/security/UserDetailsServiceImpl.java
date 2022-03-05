@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-class CustomUserDetailsService implements UserDetailsService {
+class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 

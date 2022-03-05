@@ -15,6 +15,6 @@ class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessH
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException {
         log.info("User {} has been logged in", auth.getName());
         clearAuthenticationAttributes(request);
-        response.sendRedirect("/");
+        response.sendRedirect("/bookstore");
     }
 }
