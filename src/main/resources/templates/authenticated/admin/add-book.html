@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/authenticated/header('Dodawanie książki')"></head>
 <body>
-
+<th:block th:replace="fragments/authenticated/navbar"/>
+<h1>Dodaj książkę!</h1>
 </body>
 </html>
