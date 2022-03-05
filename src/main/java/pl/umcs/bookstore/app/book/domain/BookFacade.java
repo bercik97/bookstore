@@ -19,4 +19,8 @@ public class BookFacade {
     public void create(CreateBookDto dto, BindingResult bindingResult) {
         service.create(dto, bindingResult);
     }
+
+    public void deleteById(long id) {
+        service.deleteById(id);
+    }
 }

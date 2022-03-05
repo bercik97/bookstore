@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.umcs.bookstore.app.book.domain.BookFacade;
@@ -37,11 +38,16 @@ class BookAdminController {
     @PostMapping
     public String create(Model model, @ModelAttribute("createBookDto") CreateBookDto dto, BindingResult bindingResult) {
         facade.create(dto, bindingResult);
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("createBookDto", dto);
-            return "authenticated/admin/add-book";
+        if (!bindingResult.hasErrors()) {
+            return "redirect:/admin-panel/books";
         }
-        model.addAttribute("successBookAdded", true);
-        return "authenticated/admin/books";
+        model.addAttribute("createBookDto", dto);
+        return "authenticated/admin/add-book";
+    }
+
+    @PostMapping("{id}")
+    public String deleteById(@PathVariable long id) {
+        facade.deleteById(id);
+        return "redirect:/admin-panel/books";
     }
 }

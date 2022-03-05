@@ -13,6 +13,7 @@ import pl.umcs.bookstore.app.shared.Query;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "books")
@@ -31,6 +32,8 @@ public class Book extends BaseEntity implements Query<BookVO> {
 
     @Override
     public BookVO convert() {
-        return BookVO.of(getId(), getCreatedDate(), this.title, this.author);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z");
+        String formattedCreatedDate = getCreatedDate().format(formatter);
+        return BookVO.of(getId(), formattedCreatedDate, this.title, this.author);
     }
 }

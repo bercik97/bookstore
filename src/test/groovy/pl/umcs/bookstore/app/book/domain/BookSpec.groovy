@@ -74,4 +74,16 @@ class BookSpec extends Specification implements BookFixture {
         then:
         !foundBooks.isEmpty() && foundBooks.size() == db.size()
     }
+
+    def 'Should delete book by id'() {
+        given:
+        def bookId = 1L
+        db.put(bookId, createBook())
+
+        when:
+        bookFacade.deleteById(bookId)
+
+        then:
+        db.isEmpty() && db.get(bookId) == null
+    }
 }

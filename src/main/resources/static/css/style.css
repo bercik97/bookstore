@@ -1,5 +1,5 @@
-nav {
-    background-color: #4F46E5;
+.content {
+    padding-top: 2%;
 }
 
 li[class='nav-item'] a[class='nav-link'] {

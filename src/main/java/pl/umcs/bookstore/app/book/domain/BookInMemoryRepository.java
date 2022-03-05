@@ -32,4 +32,9 @@ class BookInMemoryRepository implements BookRepository {
     public List<Book> findAll() {
         return new ArrayList<>(db.values());
     }
+
+    @Override
+    public void deleteById(long id) {
+        db.remove(id);
+    }
 }

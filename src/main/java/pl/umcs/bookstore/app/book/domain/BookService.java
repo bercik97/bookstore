@@ -28,4 +28,8 @@ class BookService {
         }
         repository.save(BookFactory.create(dto));
     }
+
+    public void deleteById(long id) {
+        repository.deleteById(id);
+    }
 }

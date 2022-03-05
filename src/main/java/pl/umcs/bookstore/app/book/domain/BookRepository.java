@@ -12,4 +12,6 @@ public interface BookRepository extends Repository<Book, Long> {
     Optional<Book> findByTitle(String title);
 
     List<Book> findAll();
+
+    void deleteById(long id);
 }
