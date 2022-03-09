@@ -42,6 +42,14 @@ class UserInMemoryRepository implements UserRepository {
     }
 
     @Override
+    public void updatePassword(String username, String newPassword) {
+        findByUsername(username).ifPresent(user -> {
+            user.setPassword(newPassword);
+            db.put(user.getId(), user);
+        });
+    }
+
+    @Override
     public void deleteById(long id) {
         db.remove(id);
     }

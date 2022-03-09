@@ -4,6 +4,10 @@
 <body>
 <th:block th:replace="fragments/authenticated/navbar"/>
 <div class="container content">
+
+    <h3>Dodaj książkę</h3>
+    <hr/>
+
     <form method="post" action="#" th:action="@{/admin-panel/books}" th:object="${createBookDto}">
         <div class="mb-3">
             <label for="author" class="form-label">Tytuł</label>
@@ -17,7 +21,7 @@
             <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}" class="alert alert-danger"></p>
             <div th:unless="${#fields.hasErrors('author')}"></div>
         </div>
-        <button type="submit" class="btn btn-primary">Dodaj książkę</button>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
     </form>
 </div>
 </body>

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.validation.BindingResult;
 import pl.umcs.bookstore.app.shared.ValidationConstants;
+import pl.umcs.bookstore.app.user.domain.command.ChangePasswordCommand;
 import pl.umcs.bookstore.app.user.domain.dto.CreateUserDto;
 
 import java.util.regex.Pattern;
@@ -19,6 +20,11 @@ class UserValidator {
         validateUsername(dto.getUsername(), bindingResult);
         validatePassword(dto.getPassword(), bindingResult);
         validateRePassword(dto.getPassword(), dto.getRePassword(), bindingResult);
+    }
+
+    public void validate(ChangePasswordCommand command, BindingResult bindingResult) {
+        validatePassword(command.getNewPassword(), bindingResult);
+        validateRePassword(command.getNewPassword(), command.getReNewPassword(), bindingResult);
     }
 
     private void validateUsername(String username, BindingResult bindingResult) {

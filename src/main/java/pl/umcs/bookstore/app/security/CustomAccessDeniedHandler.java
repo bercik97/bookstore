@@ -16,7 +16,9 @@ class CustomAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.warn("User {} attempted to access the protected URL {}", auth.getName(), request.getRequestURL());
+        if (auth != null) {
+            log.warn("User {} attempted to access the protected URL {}", auth.getName(), request.getRequestURL());
+        }
         response.sendRedirect(request.getContextPath() + "/bookstore");
     }
 }

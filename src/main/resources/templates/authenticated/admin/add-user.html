@@ -4,6 +4,10 @@
 <body>
 <th:block th:replace="fragments/authenticated/navbar"/>
 <div class="container content">
+
+    <h3>Dodaj użytkownika</h3>
+    <hr/>
+
     <form method="post" action="#" th:action="@{/admin-panel/users}" th:object="${createUserDto}">
         <div class="mb-3">
             <label for="username" class="form-label">Nazwa użytkownika</label>
@@ -23,7 +27,7 @@
             <p th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}" class="alert alert-danger"></p>
             <div th:unless="${#fields.hasErrors('rePassword')}"></div>
         </div>
-        <button type="submit" class="btn btn-primary">Dodaj użytkownika</button>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
     </form>
 </div>
 </body>

@@ -112,6 +112,22 @@ class UserSpec extends Specification implements UserFixture {
         !foundUsers.isEmpty() && foundUsers.size() == db.size()
     }
 
+    def 'Should change user password'() {
+        given:
+        def createUserDto = createUserDto()
+        def oldPassword = createUserDto.password
+        def newPassword = '12345!aB'
+        def command = createChangePasswordCommand(createUserDto.username, newPassword, newPassword)
+        userFacade.create(createUserDto, Mock(BindingResult))
+
+        when:
+        userFacade.changePassword(command, Mock(BindingResult))
+
+        then:
+        def updatedUser = db.values().stream().filter(user -> user.username == createUserDto.username).findFirst().get()
+        updatedUser.password != oldPassword
+    }
+
     def 'Should delete user by id'() {
         given:
         def userId = 1L

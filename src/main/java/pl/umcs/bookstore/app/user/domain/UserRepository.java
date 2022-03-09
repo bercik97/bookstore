@@ -2,8 +2,12 @@ package pl.umcs.bookstore.app.user.domain;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 public interface UserRepository extends Repository<User, Long> {
@@ -13,6 +17,11 @@ public interface UserRepository extends Repository<User, Long> {
     Optional<User> findByUsername(String username);
 
     Page<User> findAllByIdIsNot(Pageable pageable, long userId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.password = :newPassword WHERE u.username = :username")
+    void updatePassword(@Param("username") String username, @Param("newPassword") String newPassword);
 
     void deleteById(long id);
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/authenticated/header('Profil')"></head>
+<body>
+<th:block th:replace="fragments/authenticated/navbar"/>
+<div class="container content">
+
+    <h3>Konto</h3>
+    <hr/>
+
+    <div th:object="${user}">
+        <div class="row">
+            <div class="col">
+                <label class="col-sm-2 col-form-label">Id</label>
+                <input readonly type="text" class="form-control" th:placeholder="${user.id}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="col-sm-2 col-form-label">Nazwa użytkownika</label>
+                <input readonly type="text" class="form-control" th:placeholder="${user.username}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="col-sm-2 col-form-label">Role</label>
+                <input readonly type="text" class="form-control" th:placeholder="${user.roles}">
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <form method="post" action="#" th:action="@{/users/profile}" th:object="${changePasswordDto}">
+        <div class="mb-3">
+            <label for="password" class="form-label">Nowe hasło</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></p>
+            <div th:unless="${#fields.hasErrors('password')}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="rePassword" class="form-label">Potwierdzenie nowego hasła</label>
+            <input type="password" class="form-control" id="rePassword" th:field="*{rePassword}">
+            <p th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}" class="alert alert-danger"></p>
+            <div th:unless="${#fields.hasErrors('rePassword')}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Zmień hasło</button>
+    </form>
+</div>
+</body>
+</html>

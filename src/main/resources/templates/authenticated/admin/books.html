@@ -4,7 +4,12 @@
 <body>
 <th:block th:replace="fragments/authenticated/navbar"/>
 <div class="container content">
+
+    <h3>Książki</h3>
+    <hr/>
+
     <button type="button" class="btn btn-primary"><a th:href="@{/admin-panel/books/add}" style="color: white; text-decoration: none;">Dodaj nową książkę</a></button>
+    <br>
     <div th:if="${!books.isEmpty()}">
         <table class="table">
             <thead>
