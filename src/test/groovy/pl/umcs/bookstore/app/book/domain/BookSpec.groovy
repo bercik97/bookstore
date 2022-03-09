@@ -1,5 +1,6 @@
 package pl.umcs.bookstore.app.book.domain
 
+import org.springframework.data.domain.Pageable
 import org.springframework.validation.BeanPropertyBindingResult
 import org.springframework.validation.BindingResult
 import pl.umcs.bookstore.app.shared.ValidationConstants
@@ -69,7 +70,7 @@ class BookSpec extends Specification implements BookFixture {
         db.put(1L, createBook())
 
         when:
-        def foundBooks = bookFacade.findAll()
+        def foundBooks = bookFacade.findAll(Pageable.unpaged())
 
         then:
         !foundBooks.isEmpty() && foundBooks.size() == db.size()

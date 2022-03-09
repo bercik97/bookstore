@@ -1,5 +1,6 @@
 package pl.umcs.bookstore.app.user.domain
 
+import org.springframework.data.domain.Pageable
 import org.springframework.validation.BeanPropertyBindingResult
 import org.springframework.validation.BindingResult
 import pl.umcs.bookstore.app.shared.ValidationConstants
@@ -98,5 +99,28 @@ class UserSpec extends Specification implements UserFixture {
         'qwerty12'   | _
         'qwerty1!'   | _
         'qwerty1YY1' | _
+    }
+
+    def 'Should find all users'() {
+        given:
+        userFacade.create(createUserDto(), Mock(BindingResult))
+
+        when:
+        def foundUsers = userFacade.findAllByIdIsNot(Pageable.unpaged(), 999L)
+
+        then:
+        !foundUsers.isEmpty() && foundUsers.size() == db.size()
+    }
+
+    def 'Should delete user by id'() {
+        given:
+        def userId = 1L
+        db.put(userId, createUser())
+
+        when:
+        userFacade.deleteById(userId)
+
+        then:
+        db.isEmpty() && db.get(userId) == null
     }
 }
