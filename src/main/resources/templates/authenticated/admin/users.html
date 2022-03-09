@@ -23,7 +23,7 @@
                 <td>
                     <form method="post" action="#" th:action="@{/admin-panel/users/{id}(id=${user.id})}">
                         <input type="hidden" name="_method" value="delete">
-                        <button type="submit" class="btn btn-danger">Usuń</button>
+                        <button type="submit" onclick="clicked(event, 'usunąć wybranego użytkownika')" class="btn btn-danger">Usuń</button>
                     </form>
                 </td>
             </tr>
@@ -42,5 +42,6 @@
         <h3 class="alert alert-info">Brak użytkowników w bazie danych!</h3>
     </div>
 </div>
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>

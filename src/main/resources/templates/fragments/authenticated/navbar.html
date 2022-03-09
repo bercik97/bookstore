@@ -21,9 +21,10 @@
                     <a class="nav-link" th:href="@{/user/me}">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Wyloguj się</a>
+                    <a class="nav-link" onclick="clicked(event, 'się wylogować')" th:href="@{/logout}">Wyloguj się</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<script th:src="@{/js/script.js}"></script>
