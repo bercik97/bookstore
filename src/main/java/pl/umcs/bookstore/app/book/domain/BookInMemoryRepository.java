@@ -1,9 +1,11 @@
 package pl.umcs.bookstore.app.book.domain;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,8 +31,8 @@ class BookInMemoryRepository implements BookRepository {
     }
 
     @Override
-    public List<Book> findAll() {
-        return new ArrayList<>(db.values());
+    public Page<Book> findAll(Pageable pageable) {
+        return new PageImpl<>(new ArrayList<>(db.values()));
     }
 
     @Override

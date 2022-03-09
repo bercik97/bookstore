@@ -1,12 +1,10 @@
 package pl.umcs.bookstore.app.book.domain;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.validation.BindingResult;
 import pl.umcs.bookstore.app.book.domain.dto.CreateBookDto;
-import pl.umcs.bookstore.app.book.domain.vo.BookVO;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 class BookService {
@@ -14,11 +12,8 @@ class BookService {
     private final BookRepository repository;
     private final BookValidator validator;
 
-    public List<BookVO> findAll() {
-        return repository.findAll()
-                .stream()
-                .map(Book::convert)
-                .collect(Collectors.toList());
+    public Page<Book> findAll(int page, int size) {
+        return repository.findAll(PageRequest.of(page, size));
     }
 
     public void create(CreateBookDto dto, BindingResult bindingResult) {

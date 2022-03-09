@@ -31,11 +31,10 @@
         </table>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Poprzedni</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Następny</a></li>
+                <li th:each="i : ${#numbers.sequence(0, books.totalPages - 1)}">
+                    <a th:href="@{/admin-panel/books/(page=${i})}" th:text="${i+1}" class="nav-link"
+                       th:classappend="${currentPage}==${i} ? 'active' : ''"></a>
+                </li>
             </ul>
         </nav>
     </div>

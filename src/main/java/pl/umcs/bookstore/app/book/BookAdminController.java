@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.umcs.bookstore.app.book.domain.BookFacade;
 import pl.umcs.bookstore.app.book.domain.dto.CreateBookDto;
-import pl.umcs.bookstore.app.book.domain.vo.BookVO;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,9 +21,9 @@ class BookAdminController {
     private final BookFacade facade;
 
     @GetMapping
-    public String booksPage(Model model) {
-        List<BookVO> books = facade.findAll();
-        model.addAttribute("books", books);
+    public String booksPage(Model model, @RequestParam(defaultValue = "0") int page) {
+        model.addAttribute("books", facade.findAll(page, 5));
+        model.addAttribute("currentPage", page);
         return "authenticated/admin/books";
     }
 

@@ -1,8 +1,9 @@
 package pl.umcs.bookstore.app.book.domain;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface BookRepository extends Repository<Book, Long> {
@@ -11,7 +12,7 @@ public interface BookRepository extends Repository<Book, Long> {
 
     Optional<Book> findByTitle(String title);
 
-    List<Book> findAll();
+    Page<Book> findAll(Pageable pageable);
 
     void deleteById(long id);
 }
