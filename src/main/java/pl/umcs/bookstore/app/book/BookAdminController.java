@@ -1,6 +1,7 @@
 package pl.umcs.bookstore.app.book;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +23,7 @@ class BookAdminController {
 
     @GetMapping
     public String booksPage(Model model, @RequestParam(defaultValue = "0") int page) {
-        model.addAttribute("books", facade.findAll(page, 5));
+        model.addAttribute("books", facade.findAll(PageRequest.of(page, 10)));
         model.addAttribute("currentPage", page);
         return "authenticated/admin/books";
     }

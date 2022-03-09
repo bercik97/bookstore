@@ -2,6 +2,7 @@ package pl.umcs.bookstore.app.book.domain;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
 import pl.umcs.bookstore.app.book.domain.dto.CreateBookDto;
 
@@ -10,8 +11,8 @@ public class BookFacade {
 
     private final BookService service;
 
-    public Page<Book> findAll(int page, int size) {
-        return service.findAll(page, size);
+    public Page<Book> findAll(Pageable pageable) {
+        return service.findAll(pageable);
     }
 
     public void create(CreateBookDto dto, BindingResult bindingResult) {
