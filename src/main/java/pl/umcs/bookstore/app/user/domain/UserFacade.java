@@ -1,6 +1,8 @@
 package pl.umcs.bookstore.app.user.domain;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
 import pl.umcs.bookstore.app.user.domain.dto.CreateUserDto;
 
@@ -11,5 +13,13 @@ public class UserFacade {
 
     public void create(CreateUserDto dto, BindingResult bindingResult) {
         service.create(dto, bindingResult);
+    }
+
+    public Page<User> findAllByIdIsNot(Pageable pageable, long userId) {
+        return service.findAllByIdIsNot(pageable, userId);
+    }
+
+    public void deleteById(long id) {
+        service.deleteById(id);
     }
 }

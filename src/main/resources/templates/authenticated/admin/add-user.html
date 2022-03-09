@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/authenticated/header('Dodawanie użytkownika')"></head>
+<body>
+<th:block th:replace="fragments/authenticated/navbar"/>
+<div class="container content">
+    <form method="post" action="#" th:action="@{/admin-panel/users}" th:object="${createUserDto}">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nazwa użytkownika</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}">
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></p>
+            <div th:unless="${#fields.hasErrors('username')}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Hasło</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></p>
+            <div th:unless="${#fields.hasErrors('password')}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="rePassword" class="form-label">Potwierdzenie hasła</label>
+            <input type="password" class="form-control" id="rePassword" th:field="*{rePassword}">
+            <p th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}" class="alert alert-danger"></p>
+            <div th:unless="${#fields.hasErrors('rePassword')}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Dodaj użytkownika</button>
+    </form>
+</div>
+</body>
+</html>

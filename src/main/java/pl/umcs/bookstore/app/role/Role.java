@@ -24,4 +24,9 @@ public class Role extends BaseEntity {
         super(id, ZonedDateTime.now());
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return role;
+    }
 }
