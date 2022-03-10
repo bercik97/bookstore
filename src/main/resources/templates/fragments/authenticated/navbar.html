@@ -6,6 +6,12 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div th:if="${session.shoppingCart.isEmpty()}">
+            <a style="text-decoration: none; color: red" href="#"><i style="font-size: 30px" class="fa fa-shopping-cart" th:text="' Twój koszyk jest pusty'"></i></a>
+        </div>
+        <div th:if="${!session.shoppingCart.isEmpty()}">
+            <a style="text-decoration: none; color: limegreen" href="#"><i style="font-size: 30px" class="fa fa-shopping-cart" th:text="' Liczba książek w koszyku: ' + ${session.shoppingCart.size()}"></i></a>
+        </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
