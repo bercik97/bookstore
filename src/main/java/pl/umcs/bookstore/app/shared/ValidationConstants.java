@@ -8,6 +8,7 @@ public interface ValidationConstants {
         String RE_PASSWORD = "rePassword";
         String TITLE = "title";
         String AUTHOR = "author";
+        String PRICE = "price";
     }
 
     interface Error {
@@ -20,5 +21,6 @@ public interface ValidationConstants {
         String TITLE_IS_REQUIRED = "TITLE_IS_REQUIRED";
         String TITLE_TAKEN = "TITLE_TAKEN";
         String AUTHOR_IS_REQUIRED = "AUTHOR_IS_REQUIRED";
+        String PRICE_CANNOT_BE_LOWER_OR_EQUAL_ZERO = "PRICE_CANNOT_BE_LOWER_OR_EQUAL_ZERO";
     }
 }

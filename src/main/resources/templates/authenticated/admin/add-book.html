@@ -21,6 +21,12 @@
             <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}" class="alert alert-danger"></p>
             <div th:unless="${#fields.hasErrors('author')}"></div>
         </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Cena</label>
+            <input type="text" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control" id="price" th:field="*{price}">
+            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="alert alert-danger"></p>
+            <div th:unless="${#fields.hasErrors('price')}"></div>
+        </div>
         <button type="submit" class="btn btn-primary">Dodaj</button>
     </form>
 </div>

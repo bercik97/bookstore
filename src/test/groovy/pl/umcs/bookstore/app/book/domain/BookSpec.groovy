@@ -65,6 +65,24 @@ class BookSpec extends Specification implements BookFixture {
         ValidationConstants.Field.AUTHOR | ValidationConstants.Error.AUTHOR_IS_REQUIRED | 'Steve Jobs bio' | null              | _
     }
 
+    @Unroll
+    def 'Should receive specific error cause price cannot be lower or equal 0.0'(price) {
+        given:
+        def dto = createBookDto('someTitle', 'someAuthor', price)
+        def bindingResult = new BeanPropertyBindingResult(dto, 'createBookDto')
+
+        when: 'we try to create a book'
+        bookFacade.create(dto, bindingResult)
+
+        then: 'binding result contains error about price'
+        bindingResult.getFieldError(ValidationConstants.Field.PRICE).code == ValidationConstants.Error.PRICE_CANNOT_BE_LOWER_OR_EQUAL_ZERO
+
+        where:
+        price | _
+        0.0   | _
+        -1.0  | _
+    }
+
     def 'Should find all books'() {
         given:
         db.put(1L, createBook())

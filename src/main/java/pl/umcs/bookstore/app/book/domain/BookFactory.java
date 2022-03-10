@@ -11,6 +11,7 @@ class BookFactory {
         return Book.builder()
                 .title(dto.getTitle())
                 .author(dto.getAuthor())
+                .price(dto.getPrice())
                 .build();
     }
 }

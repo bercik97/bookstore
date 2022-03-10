@@ -14,6 +14,7 @@ class BookValidator {
     public void validate(CreateBookDto dto, BindingResult bindingResult) {
         validateTitle(dto.getTitle(), bindingResult);
         validateAuthor(dto.getAuthor(), bindingResult);
+        validatePrice(dto.getPrice(), bindingResult);
     }
 
     private void validateTitle(String title, BindingResult bindingResult) {
@@ -29,6 +30,13 @@ class BookValidator {
         final String fieldName = ValidationConstants.Field.AUTHOR;
         if (Strings.isBlank(author)) {
             bindingResult.rejectValue(fieldName, ValidationConstants.Error.AUTHOR_IS_REQUIRED);
+        }
+    }
+
+    private void validatePrice(double price, BindingResult bindingResult) {
+        final String fieldName = ValidationConstants.Field.PRICE;
+        if (price <= 0) {
+            bindingResult.rejectValue(fieldName, ValidationConstants.Error.PRICE_CANNOT_BE_LOWER_OR_EQUAL_ZERO);
         }
     }
 }
