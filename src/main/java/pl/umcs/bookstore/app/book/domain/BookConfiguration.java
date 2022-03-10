@@ -12,13 +12,15 @@ class BookConfiguration {
     public BookFacade bookFacade(BookRepository repository) {
         BookValidator validator = new BookValidator(repository);
         BookService service = new BookService(repository, validator);
-        return new BookFacade(service);
+        BookSessionService sessionService = new BookSessionService(repository);
+        return new BookFacade(service, sessionService);
     }
 
     public BookFacade bookFacade(ConcurrentHashMap<Long, Book> db) {
         BookInMemoryRepository repository = new BookInMemoryRepository(db);
         BookValidator validator = new BookValidator(repository);
         BookService service = new BookService(repository, validator);
-        return new BookFacade(service);
+        BookSessionService sessionService = new BookSessionService(repository);
+        return new BookFacade(service, sessionService);
     }
 }

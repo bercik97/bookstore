@@ -23,6 +23,14 @@ class BookInMemoryRepository implements BookRepository {
     }
 
     @Override
+    public Optional<Book> findById(long id) {
+        return db.values()
+                .stream()
+                .filter(book -> id == book.getId())
+                .findFirst();
+    }
+
+    @Override
     public Optional<Book> findByTitle(String title) {
         return db.values()
                 .stream()

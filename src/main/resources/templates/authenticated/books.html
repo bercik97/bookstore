@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/authenticated/header('Strona główna')"></head>
+<body>
+<th:block th:replace="fragments/authenticated/navbar"/>
+<div class="container content">
+
+    <h3>Strona główna</h3>
+    <hr/>
+
+    <div th:if="${!books.isEmpty()}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Data dodania</th>
+                <th scope="col">Tytuł</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Koszyk</th>
+            </tr>
+            </thead>
+            <tbody th:each="book:${books}">
+            <tr>
+                <td th:text="${book.createdDate}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.price}"></td>
+                <td th:if="${!book.isAddedToSession}">
+                    <form method="post" action="#" th:action="@{/books/add/{id}(id=${book.id})}">
+                        <input type="hidden" name="_method" value="add">
+                        <button type="submit" onclick="clicked(event, 'dodać wybraną książkę do koszyka')" class="btn btn-success">Dodaj</button>
+                    </form>
+                </td>
+                <td th:if="${book.isAddedToSession}">
+                    <form method="post" action="#" th:action="@{/books/remove/{id}(id=${book.id})}">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" onclick="clicked(event, 'usunąć wybraną książkę z koszyka')" class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li th:each="i : ${#numbers.sequence(0, books.totalPages - 1)}">
+                    <a th:href="@{/books/(page=${i})}" th:text="${i+1}" class="nav-link"
+                       th:classappend="${currentPage}==${i} ? 'active' : ''"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div th:unless="${!books.isEmpty()}">
+        <h3 class="alert alert-info">Brak książek w bazie danych!</h3>
+    </div>
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

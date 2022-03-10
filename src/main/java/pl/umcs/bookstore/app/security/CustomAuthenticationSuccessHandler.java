@@ -21,7 +21,7 @@ class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessH
         log.info("User {} has been logged in", auth.getName());
         clearAuthenticationAttributes(request);
         createShoppingCartSession();
-        response.sendRedirect("/bookstore");
+        response.sendRedirect("/books");
     }
 
     private void createShoppingCartSession() {

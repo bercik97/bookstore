@@ -10,6 +10,8 @@ public interface BookRepository extends Repository<Book, Long> {
 
     void save(Book book);
 
+    Optional<Book> findById(long id);
+
     Optional<Book> findByTitle(String title);
 
     Page<Book> findAll(Pageable pageable);
