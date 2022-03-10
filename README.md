@@ -12,4 +12,16 @@
 
 - [ ] Płatności - np. wysyłanie szczczegółów zamówienia na maila z danymi do przelewu lub podpięcie np. PayU
 
-- [ ] Projekt powinien zawierać opis funkcjonalności, skrypt do zbudowania bazy danych, oraz inne opisy sposobu uruchomienia jeżeli potrzeba.
+- [X] Projekt powinien zawierać opis funkcjonalności, skrypt do zbudowania bazy danych, oraz inne opisy sposobu uruchomienia jeżeli potrzeba.
+
+
+### -- Dodatkowe funkcjonalności --
+
+- [X] Admin panel - lista użytkowników
+- [X] Profil usera
+
+
+### Uruchamianie aplikacji
+
+- baza danych postgres: jdbc:postgresql://localhost:5432/bookstore (username: postgres) (password: admin)
+- tabele oraz dane dodają się automatycznie przy starcie aplikacji
