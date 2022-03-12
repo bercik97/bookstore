@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.umcs.bookstore.app.book.domain.command.ManageBookInShoppingCardCommand;
+import pl.umcs.bookstore.app.book.domain.command.SummarizeShoppingCardCommand;
 import pl.umcs.bookstore.app.book.domain.dto.BookDto;
+import pl.umcs.bookstore.app.book.domain.dto.SummarizeShoppingCardDto;
 
 import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
@@ -48,6 +50,15 @@ class BookSessionService {
                 });
     }
 
+    public SummarizeShoppingCardDto summarizeShoppingCard(SummarizeShoppingCardCommand command) {
+        List<Book> books = getBooksFromSession(command.getSession())
+                .stream()
+                .map(Book::from)
+                .collect(Collectors.toList());
+        double totalPrice = calculateTotalPrice(books);
+        return new SummarizeShoppingCardDto(command.getUserEmail(), totalPrice, books);
+    }
+
     private List<Long> getBooksIdsFromSession(HttpSession session) {
         return getBooksFromSession(session)
                 .stream()
@@ -58,5 +69,11 @@ class BookSessionService {
     private List<BookDto> getBooksFromSession(HttpSession session) {
         List<BookDto> books = (List<BookDto>) session.getAttribute(SHOPPING_CART);
         return books == null ? new LinkedList<>() : books;
+    }
+
+    private double calculateTotalPrice(List<Book> books) {
+        return books.stream()
+                .mapToDouble(Book::getPrice)
+                .sum();
     }
 }

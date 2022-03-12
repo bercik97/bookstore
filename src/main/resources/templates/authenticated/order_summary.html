@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/authenticated/header('Podsumowanie zamówienia')"></head>
+<body>
+<th:block th:replace="fragments/authenticated/navbar"/>
+<div class="container content">
+
+    <h3>Podsumowanie zamówienia</h3>
+    <hr/>
+
+    <h3>Adres email: <span th:text="${summary.userEmail}"></span></h3>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Tytuł</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Cena</th>
+        </tr>
+        </thead>
+        <tbody th:each="book:${summary.books}">
+        <tr>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Łącznie do zapłaty: <span th:text="${summary.totalPrice}"></span></h3>
+
+    <form method="post" action="#" th:action="@{/orders}">
+        <button type="submit" onclick="clicked(event, 'złożyć zamówienie')" class="btn btn-success">Złóż zamówienie</button>
+    </form>
+
+</div>
+
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

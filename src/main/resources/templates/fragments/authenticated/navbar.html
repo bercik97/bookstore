@@ -10,7 +10,7 @@
             <a style="text-decoration: none; color: red" href="#"><i style="font-size: 30px" class="fa fa-shopping-cart" th:text="' Twój koszyk jest pusty'"></i></a>
         </div>
         <div th:if="${!session.shoppingCart.isEmpty()}">
-            <a style="text-decoration: none; color: limegreen" href="#"><i style="font-size: 30px" class="fa fa-shopping-cart" th:text="' Liczba książek w koszyku: ' + ${session.shoppingCart.size()}"></i></a>
+            <a style="text-decoration: none; color: limegreen" th:href="@{/orders/summary}"><i style="font-size: 30px" class="fa fa-shopping-cart" th:text="' Liczba książek w koszyku: ' + ${session.shoppingCart.size()}"></i></a>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
@@ -22,6 +22,9 @@
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" th:href="@{/admin-panel/users}">Użytkownicy</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin-panel/orders}">Zamówienia</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/users/profile}">Profil</a>

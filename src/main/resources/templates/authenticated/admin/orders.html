@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/authenticated/header('Zamówienia')"></head>
+<body>
+<th:block th:replace="fragments/authenticated/navbar"/>
+<div class="container content">
+
+    <h3>Zamówienia</h3>
+    <hr/>
+
+    <br>
+    <div th:if="${!orders.isEmpty()}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Data dodania</th>
+                <th scope="col">Email użytkownika</th>
+                <th scope="col">Liczba książek</th>
+                <th scope="col">Łączna cena</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody th:each="order:${orders}">
+            <tr>
+                <td th:text="${order.createdDate}"></td>
+                <td th:text="${order.userEmail}"></td>
+                <td th:text="${order.numberOfBooks}"></td>
+                <td th:text="${order.totalPrice}"></td>
+                <td th:text="${order.status}"></td>
+                <td>
+                    <form method="post" action="#" th:action="@{/admin-panel/orders/{id}(id=${order.id})}">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" onclick="clicked(event, 'usunąć wybrane zamówienie')" class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li th:each="i : ${#numbers.sequence(0, orders.totalPages - 1)}">
+                    <a th:href="@{/admin-panel/books/(page=${i})}" th:text="${i+1}" class="nav-link"
+                       th:classappend="${currentPage}==${i} ? 'active' : ''"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div th:unless="${!orders.isEmpty()}">
+        <h3 class="alert alert-info">Brak zamówień w bazie danych!</h3>
+    </div>
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
