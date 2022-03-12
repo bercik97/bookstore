@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/authenticated/header('Moje zamówienia')"></head>
+<body>
+<th:block th:replace="fragments/authenticated/navbar"/>
+<div class="container content">
+
+    <h3>Moje zamówienie</h3>
+    <hr/>
+
+    <p>Id: <span th:text="${order.id}"></span></p>
+    <p>Data złożenia zamówienia: <span th:text="${order.createdDate}"></span></p>
+    <p>Łączna cena: <span th:text="${order.totalPrice}"></span></p>
+    <p>Status: <span th:text="${order.status}"></span></p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Data dodania</th>
+            <th scope="col">Tytuł</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Cena</th>
+        </tr>
+        </thead>
+        <tbody th:each="book:${order.books}">
+        <tr>
+            <td th:text="${book.createdDate}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

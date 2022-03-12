@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.umcs.bookstore.app.book.domain.dto.SummarizeShoppingCardDto;
+import pl.umcs.bookstore.app.order.domain.dto.OrderDetailsDto;
 import pl.umcs.bookstore.app.order.domain.dto.OrderOverviewDto;
 
 @RequiredArgsConstructor
@@ -17,6 +18,14 @@ public class OrderFacade {
 
     public Page<OrderOverviewDto> findAll(Pageable pageable) {
         return service.findAll(pageable);
+    }
+
+    public Page<OrderOverviewDto> findAllByUserEmail(String userEmail, Pageable pageable) {
+        return service.findAllByUserEmail(userEmail, pageable);
+    }
+
+    public OrderDetailsDto findByUserEmailAndId(String userEmail, long id) {
+        return service.findByUserEmailAndId(userEmail, id);
     }
 
     public void deleteById(long id) {

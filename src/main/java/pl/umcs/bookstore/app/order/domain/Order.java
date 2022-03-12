@@ -16,6 +16,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Entity
@@ -35,4 +36,11 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus status;
+
+    public Order(long id, ZonedDateTime createdDate, String userEmail, List<Book> books, OrderStatus status) {
+        super(id, createdDate);
+        this.userEmail = userEmail;
+        this.books = books;
+        this.status = status;
+    }
 }

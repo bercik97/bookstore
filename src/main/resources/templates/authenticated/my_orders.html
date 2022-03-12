@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/authenticated/header('Moje zamówienia')"></head>
+<body>
+<th:block th:replace="fragments/authenticated/navbar"/>
+<div class="container content">
+
+    <h3>Moje zamówienia</h3>
+    <hr/>
+
+    <div th:if="${!orders.isEmpty()}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Data dodania</th>
+                <th scope="col">Liczba książek</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Status</th>
+                <th scope="col">Szczegóły</th>
+            </tr>
+            </thead>
+            <tbody th:each="order:${orders}">
+            <tr>
+                <td th:text="${order.createdDate}"></td>
+                <td th:text="${order.numberOfBooks}"></td>
+                <td th:text="${order.totalPrice}"></td>
+                <td th:text="${order.status}"></td>
+                <td>
+                    <a th:href="@{/orders/me/{id}(id=${order.id})}" type="button" class="btn btn-info">Zobacz szczegóły</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li th:each="i : ${#numbers.sequence(0, orders.totalPages - 1)}">
+                    <a th:href="@{/orders/me/(page=${i})}" th:text="${i+1}" class="nav-link"
+                       th:classappend="${currentPage}==${i} ? 'active' : ''"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div th:unless="${!orders.isEmpty()}">
+        <h3 class="alert alert-info">Brak zamówień!</h3>
+    </div>
+
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

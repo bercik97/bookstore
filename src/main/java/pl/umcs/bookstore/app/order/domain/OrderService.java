@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.umcs.bookstore.app.book.domain.Book;
 import pl.umcs.bookstore.app.book.domain.dto.SummarizeShoppingCardDto;
+import pl.umcs.bookstore.app.order.domain.dto.OrderDetailsDto;
 import pl.umcs.bookstore.app.order.domain.dto.OrderOverviewDto;
 
 import java.util.List;
@@ -24,6 +25,23 @@ class OrderService {
                     double totalPrice = calculateTotalPrice(order.getBooks());
                     return OrderOverviewDto.from(order, totalPrice);
                 });
+    }
+
+    public Page<OrderOverviewDto> findAllByUserEmail(String userEmail, Pageable pageable) {
+        return repository.findAllByUserEmail(userEmail, pageable)
+                .map(order -> {
+                    double totalPrice = calculateTotalPrice(order.getBooks());
+                    return OrderOverviewDto.from(order, totalPrice);
+                });
+    }
+
+    public OrderDetailsDto findByUserEmailAndId(String userEmail, long id) {
+        return repository.findByUserEmailAndId(userEmail, id)
+                .map(order -> {
+                    double totalPrice = calculateTotalPrice(order.getBooks());
+                    return OrderDetailsDto.from(order, totalPrice);
+                })
+                .orElseThrow(() -> new RuntimeException("Cannot find order by userEmail and id: " + userEmail + ", " + id));
     }
 
     public void deleteById(long id) {

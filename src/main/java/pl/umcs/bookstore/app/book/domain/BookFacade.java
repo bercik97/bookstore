@@ -7,8 +7,8 @@ import org.springframework.validation.BindingResult;
 import pl.umcs.bookstore.app.book.domain.command.ManageBookInShoppingCardCommand;
 import pl.umcs.bookstore.app.book.domain.command.SummarizeShoppingCardCommand;
 import pl.umcs.bookstore.app.book.domain.dto.BookDto;
-import pl.umcs.bookstore.app.book.domain.dto.SummarizeShoppingCardDto;
 import pl.umcs.bookstore.app.book.domain.dto.CreateBookDto;
+import pl.umcs.bookstore.app.book.domain.dto.SummarizeShoppingCardDto;
 
 import javax.servlet.http.HttpSession;
 
