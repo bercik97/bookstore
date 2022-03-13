@@ -6,7 +6,7 @@
 
 - [X] CRUD + koszyk - dodawanie usuwanie książek przez Usera.
 
-- [ ] Zamówienia -  Dodanie funkcji które może wykonywać User - składanie zamówień na książki, zmiana statusu zamówienia przez admina.
+- [X] Zamówienia -  Dodanie funkcji które może wykonywać User - składanie zamówień na książki, zmiana statusu zamówienia przez admina.
 
 - [X] Wygląd aplikacji Można użyć boostrapa / Własny bardziej rozbudowany projekt lub bardziej rozszerzony projekt z przykładu
 
@@ -17,9 +17,9 @@
 
 ### -- Dodatkowe funkcjonalności --
 
-- [X] Admin panel - lista użytkowników
-- [X] Profil usera
-
+- [X] Rejestracja
+- [X] Profil usera  
+- [X] Admin panel
 
 ### Uruchamianie aplikacji
 

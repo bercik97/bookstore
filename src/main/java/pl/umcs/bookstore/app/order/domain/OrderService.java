@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.umcs.bookstore.app.book.domain.Book;
 import pl.umcs.bookstore.app.book.domain.dto.SummarizeShoppingCardDto;
+import pl.umcs.bookstore.app.order.domain.command.UpdateOrderStatusCommand;
 import pl.umcs.bookstore.app.order.domain.dto.OrderDetailsDto;
 import pl.umcs.bookstore.app.order.domain.dto.OrderOverviewDto;
 
@@ -42,6 +43,19 @@ class OrderService {
                     return OrderDetailsDto.from(order, totalPrice);
                 })
                 .orElseThrow(() -> new RuntimeException("Cannot find order by userEmail and id: " + userEmail + ", " + id));
+    }
+
+    public OrderDetailsDto findById(long id) {
+        return repository.findById(id)
+                .map(order -> {
+                    double totalPrice = calculateTotalPrice(order.getBooks());
+                    return OrderDetailsDto.from(order, totalPrice);
+                })
+                .orElseThrow(() -> new RuntimeException("Cannot find order id: " + id));
+    }
+
+    public void updateStatus(UpdateOrderStatusCommand command) {
+        repository.updateStatus(command.getNewStatus(), command.getId());
     }
 
     public void deleteById(long id) {

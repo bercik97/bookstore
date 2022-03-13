@@ -1,6 +1,8 @@
 package pl.umcs.bookstore.app.order.domain
 
 import org.springframework.data.domain.Pageable
+import pl.umcs.bookstore.app.order.domain.command.UpdateOrderStatusCommand
+import pl.umcs.bookstore.app.order.domain.dto.UpdateOrderStatusDto
 import spock.lang.Specification
 
 import java.util.concurrent.ConcurrentHashMap
@@ -50,6 +52,26 @@ class OrderSpec extends Specification implements OrderFixture {
         !foundOrders.isEmpty() && foundOrders.size() == db.size()
     }
 
+    def 'Should find order by order id'() {
+        given:
+        def orderId = 1L
+        db.put(orderId, createOrder(orderId))
+
+        when:
+        def foundOrder = orderFacade.findById(orderId)
+
+        then:
+        foundOrder != null
+    }
+
+    def 'Should throw an exception when cannot find order by order id'() {
+        when:
+        orderFacade.findById(0L)
+
+        then:
+        thrown(RuntimeException)
+    }
+
     def 'Should find order by user email and order id'() {
         given:
         def orderId = 1L
@@ -69,6 +91,23 @@ class OrderSpec extends Specification implements OrderFixture {
 
         then:
         thrown(RuntimeException)
+    }
+
+    def 'Should update order status by id'() {
+        given:
+        def orderId = 1L
+        def order = createOrder()
+        def oldStatus = OrderStatus.UNPAID
+        def newStatus = OrderStatus.PAID
+        order.status = oldStatus
+        db.put(orderId, order)
+
+        when:
+        orderFacade.updateStatus(UpdateOrderStatusCommand.of(orderId, new UpdateOrderStatusDto(newStatus)))
+
+        then:
+        def updatedOrder = db.get(orderId)
+        updatedOrder.status != oldStatus && updatedOrder.status == newStatus
     }
 
     def 'Should delete order by id'() {

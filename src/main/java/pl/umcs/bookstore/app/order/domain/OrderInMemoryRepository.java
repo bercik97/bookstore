@@ -48,6 +48,22 @@ class OrderInMemoryRepository implements OrderRepository {
     }
 
     @Override
+    public Optional<Order> findById(long id) {
+        return db.values()
+                .stream()
+                .filter(order -> id == order.getId())
+                .findFirst();
+    }
+
+    @Override
+    public void updateStatus(OrderStatus newStatus, long id) {
+        findById(id).ifPresent(order -> {
+            order.setStatus(newStatus);
+            db.put(order.getId(), order);
+        });
+    }
+
+    @Override
     public void deleteById(long id) {
         db.remove(id);
     }

@@ -18,6 +18,8 @@
                 <th scope="col">Liczba książek</th>
                 <th scope="col">Łączna cena</th>
                 <th scope="col">Status</th>
+                <th scope="col">Usuwanie</th>
+                <th scope="col">Edycja</th>
             </tr>
             </thead>
             <tbody th:each="order:${orders}">
@@ -32,6 +34,9 @@
                         <input type="hidden" name="_method" value="delete">
                         <button type="submit" onclick="clicked(event, 'usunąć wybrane zamówienie')" class="btn btn-danger">Usuń</button>
                     </form>
+                </td>
+                <td>
+                    <a th:href="@{/admin-panel/orders/edit/{id}(id=${order.id})}" type="button" class="btn btn-info">Edytuj status</a>
                 </td>
             </tr>
             </tbody>

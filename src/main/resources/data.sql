@@ -49,3 +49,19 @@ VALUES (CURRENT_TIMESTAMP, 'Steve Jobs bio', 'Walter Isaacson', 39.99),
        (CURRENT_TIMESTAMP, 'Labirynty Scruma', 'Jacek Wieczorek', 39),
        (CURRENT_TIMESTAMP, 'W głowie twórcy Bitcoina', 'Feniks', 69.99),
        (CURRENT_TIMESTAMP, 'Spring Framework. Wprowadzenie do tworzenia aplikacji', 'Sharma J. ,Sarin Ashish', 44.85);
+
+INSERT INTO orders (created_date, status, user_email)
+VALUES (CURRENT_TIMESTAMP, 'UNPAID', 'admin'),
+       (CURRENT_TIMESTAMP, 'PAID', 'admin'),
+       (CURRENT_TIMESTAMP, 'ON_THE_WAY', 'admin'),
+       (CURRENT_TIMESTAMP, 'DELIVERED', 'admin');
+
+INSERT INTO orders_books (order_id, books_id)
+VALUES (1, 1),
+       (1, 2),
+       (1, 3),
+       (2, 5),
+       (3, 5),
+       (3, 6),
+       (3, 9),
+       (4, 15);

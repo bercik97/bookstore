@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.umcs.bookstore.app.book.domain.dto.SummarizeShoppingCardDto;
+import pl.umcs.bookstore.app.order.domain.command.UpdateOrderStatusCommand;
 import pl.umcs.bookstore.app.order.domain.dto.OrderDetailsDto;
 import pl.umcs.bookstore.app.order.domain.dto.OrderOverviewDto;
 
@@ -24,8 +25,16 @@ public class OrderFacade {
         return service.findAllByUserEmail(userEmail, pageable);
     }
 
+    public OrderDetailsDto findById(long id) {
+        return service.findById(id);
+    }
+
     public OrderDetailsDto findByUserEmailAndId(String userEmail, long id) {
         return service.findByUserEmailAndId(userEmail, id);
+    }
+
+    public void updateStatus(UpdateOrderStatusCommand command) {
+        service.updateStatus(command);
     }
 
     public void deleteById(long id) {
