@@ -10,7 +10,7 @@
 
 - [X] Wygląd aplikacji Można użyć boostrapa / Własny bardziej rozbudowany projekt lub bardziej rozszerzony projekt z przykładu
 
-- [ ] Płatności - np. wysyłanie szczczegółów zamówienia na maila z danymi do przelewu lub podpięcie np. PayU
+- [X] Płatności - np. wysyłanie szczczegółów zamówienia na maila z danymi do przelewu lub podpięcie np. PayU
 
 - [X] Projekt powinien zawierać opis funkcjonalności, skrypt do zbudowania bazy danych, oraz inne opisy sposobu uruchomienia jeżeli potrzeba.
 
