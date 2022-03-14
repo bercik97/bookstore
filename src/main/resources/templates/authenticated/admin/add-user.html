@@ -10,10 +10,10 @@
 
     <form method="post" action="#" th:action="@{/admin-panel/users}" th:object="${createUserDto}">
         <div class="mb-3">
-            <label for="username" class="form-label">Nazwa użytkownika</label>
-            <input type="text" class="form-control" id="username" th:field="*{username}">
-            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></p>
-            <div th:unless="${#fields.hasErrors('username')}"></div>
+            <label for="email" class="form-label">Nazwa użytkownika</label>
+            <input type="text" class="form-control" id="email" th:field="*{email}">
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></p>
+            <div th:unless="${#fields.hasErrors('email')}"></div>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Hasło</label>

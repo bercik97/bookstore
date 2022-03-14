@@ -33,7 +33,7 @@ class UserProfileController {
     @PostMapping
     public String changePassword(Model model, @ModelAttribute("changePasswordDto") ChangePasswordDto dto, BindingResult bindingResult, Authentication authentication) {
         User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
-        facade.changePassword(ChangePasswordCommand.of(user.getUsername(), dto), bindingResult);
+        facade.changePassword(ChangePasswordCommand.of(user.getEmail(), dto), bindingResult);
         model.addAttribute("user", user);
         if (bindingResult.hasErrors()) {
             model.addAttribute("changePasswordDto", dto);

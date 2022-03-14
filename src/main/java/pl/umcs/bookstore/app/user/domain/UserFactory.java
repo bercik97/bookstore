@@ -13,7 +13,7 @@ class UserFactory {
 
     public static User create(CreateUserDto dto) {
         return User.builder()
-                .username(dto.getUsername())
+                .email(dto.getEmail())
                 .password(new BCryptPasswordEncoder().encode(dto.getPassword()))
                 .roles(Set.of(RoleType.ROLE_USER.create()))
                 .build();

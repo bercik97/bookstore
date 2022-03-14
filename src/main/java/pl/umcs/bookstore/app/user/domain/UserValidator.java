@@ -12,12 +12,13 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 class UserValidator {
 
+    private static final Pattern EMAIL_REGEX = Pattern.compile("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private static final Pattern PASSWORD_REGEX = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,}$");
 
     private final UserRepository repository;
 
     public void validate(CreateUserDto dto, BindingResult bindingResult) {
-        validateUsername(dto.getUsername(), bindingResult);
+        validateEmail(dto.getEmail(), bindingResult);
         validatePassword(dto.getPassword(), bindingResult);
         validateRePassword(dto.getPassword(), dto.getRePassword(), bindingResult);
     }
@@ -27,12 +28,14 @@ class UserValidator {
         validateRePassword(command.getNewPassword(), command.getReNewPassword(), bindingResult);
     }
 
-    private void validateUsername(String username, BindingResult bindingResult) {
-        final String fieldName = ValidationConstants.Field.USERNAME;
-        if (Strings.isBlank(username)) {
-            bindingResult.rejectValue(fieldName, ValidationConstants.Error.USERNAME_IS_REQUIRED);
-        } else if (repository.findByUsername(username).isPresent()) {
-            bindingResult.rejectValue(fieldName, ValidationConstants.Error.USERNAME_TAKEN);
+    private void validateEmail(String email, BindingResult bindingResult) {
+        final String fieldName = ValidationConstants.Field.EMAIL;
+        if (Strings.isBlank(email)) {
+            bindingResult.rejectValue(fieldName, ValidationConstants.Error.EMAIL_IS_REQUIRED);
+        } else if (!EMAIL_REGEX.matcher(email).matches()) {
+            bindingResult.rejectValue(fieldName, ValidationConstants.Error.EMAIL_WRONG_FORMAT);
+        } else if (repository.findByEmail(email).isPresent()) {
+            bindingResult.rejectValue(fieldName, ValidationConstants.Error.EMAIL_TAKEN);
         }
     }
 

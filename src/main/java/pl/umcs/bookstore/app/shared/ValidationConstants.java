@@ -3,7 +3,7 @@ package pl.umcs.bookstore.app.shared;
 public interface ValidationConstants {
 
     interface Field {
-        String USERNAME = "username";
+        String EMAIL = "email";
         String PASSWORD = "password";
         String RE_PASSWORD = "rePassword";
         String TITLE = "title";
@@ -12,8 +12,9 @@ public interface ValidationConstants {
     }
 
     interface Error {
-        String USERNAME_IS_REQUIRED = "USERNAME_IS_REQUIRED";
-        String USERNAME_TAKEN = "USERNAME_TAKEN";
+        String EMAIL_IS_REQUIRED = "EMAIL_IS_REQUIRED";
+        String EMAIL_WRONG_FORMAT = "EMAIL_WRONG_FORMAT";
+        String EMAIL_TAKEN = "EMAIL_TAKEN";
         String PASSWORD_IS_REQUIRED = "PASSWORD_IS_REQUIRED";
         String PASSWORD_NOT_SAFE = "PASSWORD_NOT_SAFE";
         String RE_PASSWORD_IS_REQUIRED = "RE_PASSWORD_IS_REQUIRED";

@@ -28,7 +28,7 @@ class UserService {
 
     public void changePassword(ChangePasswordCommand command, BindingResult bindingResult) {
         validator.validate(command, bindingResult);
-        repository.updatePassword(command.getUsername(), new BCryptPasswordEncoder().encode(command.getNewPassword()));
+        repository.updatePassword(command.getEmail(), new BCryptPasswordEncoder().encode(command.getNewPassword()));
     }
 
     public void deleteById(long id) {

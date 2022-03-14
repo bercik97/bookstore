@@ -22,14 +22,14 @@
                             <form method="post" action="#" th:action="@{/register}" th:object="${registerDto}" class="space-y-6">
 
                                 <div class="space-y-1">
-                                    <label for="username" class="block text-sm font-medium text-gray-700">
-                                        Nazwa użytkownika
+                                    <label for="email" class="block text-sm font-medium text-gray-700">
+                                        Email użytkownika
                                     </label>
                                     <div class="mt-1">
-                                        <input id="username" type="text" th:field="*{username}" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <input id="email" type="text" th:field="*{email}" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     </div>
-                                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></p>
-                                    <div th:unless="${#fields.hasErrors('username')}"></div>
+                                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></p>
+                                    <div th:unless="${#fields.hasErrors('email')}"></div>
                                 </div>
 
                                 <div class="space-y-1">

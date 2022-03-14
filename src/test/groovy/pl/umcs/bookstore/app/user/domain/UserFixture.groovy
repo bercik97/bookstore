@@ -6,16 +6,16 @@ import pl.umcs.bookstore.app.user.domain.dto.CreateUserDto
 
 trait UserFixture {
 
-    static CreateUserDto createUserDto(def username = 'john', def password = '12345!aA', def rePassword = '12345!aA') {
-        return new CreateUserDto(username, password, rePassword)
+    static CreateUserDto createUserDto(def email = 'john.doe@mail.com', def password = '12345!aA', def rePassword = '12345!aA') {
+        return new CreateUserDto(email, password, rePassword)
     }
 
-    static User createUser(def username = 'john', def password = '12345!aA', def rePassword = '12345!aA') {
-        def dto = createUserDto(username, password, rePassword)
+    static User createUser(def email = 'john.doe@mail.com', def password = '12345!aA', def rePassword = '12345!aA') {
+        def dto = createUserDto(email, password, rePassword)
         return UserFactory.create(dto)
     }
 
-    static ChangePasswordCommand createChangePasswordCommand(def username = 'john', def newPassword = '12345!aA', def reNewPassword = '12345!aA') {
-        return ChangePasswordCommand.of(username, new ChangePasswordDto(newPassword, reNewPassword))
+    static ChangePasswordCommand createChangePasswordCommand(def email = 'john.doe@mail.com', def newPassword = '12345!aA', def reNewPassword = '12345!aA') {
+        return ChangePasswordCommand.of(email, new ChangePasswordDto(newPassword, reNewPassword))
     }
 }

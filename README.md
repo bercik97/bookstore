@@ -23,5 +23,5 @@
 
 ### Uruchamianie aplikacji
 
-- baza danych postgres: jdbc:postgresql://localhost:5432/bookstore (username: postgres) (password: admin)
+- baza danych postgres: jdbc:postgresql://localhost:5432/bookstore (email: postgres) (password: admin)
 - tabele oraz dane dodają się automatycznie przy starcie aplikacji

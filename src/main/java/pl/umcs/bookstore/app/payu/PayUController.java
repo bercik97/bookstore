@@ -37,7 +37,7 @@ class PayUController {
     public RedirectView makePayment(@PathVariable long id, Authentication authentication, HttpSession httpSession, HttpServletRequest request) {
         OrderDetailsDto order = orderFacade.findById(id);
         User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
-        PayUOrderResponse response = service.makePayment(CreatePayUPaymentCommand.of(order, user.getUsername(), request));
+        PayUOrderResponse response = service.makePayment(CreatePayUPaymentCommand.of(order, user.getEmail(), request));
         if (!SUCCESS_STATUS_CODE.equals(response.getStatus().getStatusCode())) {
             throw new RuntimeException("Something went wrong while making payment!");
         }

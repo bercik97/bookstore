@@ -32,7 +32,7 @@ class OrderController {
     @GetMapping("/summary")
     public String orderSummarizePage(Model model, HttpSession session, Authentication authentication) {
         User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
-        SummarizeShoppingCardDto summarize = bookFacade.summarizeBooksForOrder(SummarizeShoppingCardCommand.of(user.getUsername(), session));
+        SummarizeShoppingCardDto summarize = bookFacade.summarizeBooksForOrder(SummarizeShoppingCardCommand.of(user.getEmail(), session));
         session.setAttribute("summary", summarize);
         model.addAttribute("summary", summarize);
         return "authenticated/order_summary";
@@ -41,7 +41,7 @@ class OrderController {
     @GetMapping("/me")
     public String findMyOrders(Model model, Authentication authentication, @RequestParam(defaultValue = "0") int page) {
         User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
-        model.addAttribute("orders", orderFacade.findAllByUserEmail(user.getUsername(), PageRequest.of(page, 10)));
+        model.addAttribute("orders", orderFacade.findAllByUserEmail(user.getEmail(), PageRequest.of(page, 10)));
         model.addAttribute("currentPage", page);
         model.addAttribute("hasError", null);
         model.addAttribute("paymentFinished", null);
@@ -51,7 +51,7 @@ class OrderController {
     @GetMapping("/me/{id}")
     public String findMyOrderDetails(Model model, Authentication authentication, @PathVariable long id) {
         User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
-        model.addAttribute("order", orderFacade.findByUserEmailAndId(user.getUsername(), id));
+        model.addAttribute("order", orderFacade.findByUserEmailAndId(user.getEmail(), id));
         return "authenticated/my_order_details";
     }
 

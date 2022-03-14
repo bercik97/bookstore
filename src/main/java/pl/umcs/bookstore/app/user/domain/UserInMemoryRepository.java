@@ -25,10 +25,10 @@ class UserInMemoryRepository implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> findByEmail(String email) {
         return db.values()
                 .stream()
-                .filter(user -> username.equals(user.getUsername()))
+                .filter(user -> email.equals(user.getEmail()))
                 .findFirst();
     }
 
@@ -42,8 +42,8 @@ class UserInMemoryRepository implements UserRepository {
     }
 
     @Override
-    public void updatePassword(String username, String newPassword) {
-        findByUsername(username).ifPresent(user -> {
+    public void updatePassword(String email, String newPassword) {
+        findByEmail(email).ifPresent(user -> {
             user.setPassword(newPassword);
             db.put(user.getId(), user);
         });

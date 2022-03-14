@@ -37,6 +37,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
             .and()
                 .formLogin()
+                .usernameParameter("email")
                 .loginPage("/login")
                 .failureForwardUrl("/login")
                 .successHandler(new CustomAuthenticationSuccessHandler())

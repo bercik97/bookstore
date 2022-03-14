@@ -2,20 +2,20 @@ INSERT INTO roles (created_date, role)
 VALUES (CURRENT_TIMESTAMP, 'ROLE_USER'),
        (CURRENT_TIMESTAMP, 'ROLE_ADMIN');
 
-INSERT INTO users (created_date, username, password)
+INSERT INTO users (created_date, email, password)
 VALUES (CURRENT_TIMESTAMP, 'admin@gmail.com', '$2a$12$co5TaHW5CeSho.QCTvV3oeDKjVlPYvz9zYIqLB7PBMXUMgQadp11i'),
-       (CURRENT_TIMESTAMP, 'user1', '$2a$12$4HYLqYGKlN.cIZvGm3pxS.TIyRiWX.5lM6L2WtpJpMhGTkTqf8xcm'),
-       (CURRENT_TIMESTAMP, 'user2', '$2a$12$98l15u0mhiwNw9VP6yv2PuiL.i8Z47J10VhLa0USFPZSsGX4E8xTq'),
-       (CURRENT_TIMESTAMP, 'user3', '$2a$12$IPojbzKIETrpcjfX.VlEMeRn1Jyg9crOBjY9mMhqA0WLIs1wAqFF6'),
-       (CURRENT_TIMESTAMP, 'user4', '$2a$12$pbhnAh..V0FzEdlvvpYsFuYLDJbHtgmLw4rvMLj3wCc5UVvA.Om92'),
-       (CURRENT_TIMESTAMP, 'user5', '$2a$12$vjOkKhKMxkIzhxVA84yqkuDiiEhiMFBYNhqvv4EsXEzkf72LFD4l.'),
-       (CURRENT_TIMESTAMP, 'user6', '$2a$12$8Fy5tpIxqgsEtRvU9ye9sO7zZaXZA.siLsV/SZC1VQv3n6QlPxlxO'),
-       (CURRENT_TIMESTAMP, 'user7', '$2a$12$9JNjkbDRNUfStiD/0uKVxuPkMqhEOBbbKanUpwAngszmbindnMd7G'),
-       (CURRENT_TIMESTAMP, 'user8', '$2a$12$C0h3tmI9yDjKAk9dXdLm9OgGyrgXs1rAmIor9icV5lNi6f1iCLCZK'),
-       (CURRENT_TIMESTAMP, 'user9', '$2a$12$XuKgPqlpnTW17h4k3BXhH.MGKBf4qR9ZPwAmGqqAvM6SpDD4jberS'),
-       (CURRENT_TIMESTAMP, 'user10', '$2a$12$8Yr83XwZ3hMrQ8vMSpfFje1wCxO/7nnhG7xsjwL3OROWRXA1N1U4G'),
-       (CURRENT_TIMESTAMP, 'user11', '$2a$12$SzgFCH9BEyYDTHnKfpiriORbs0DLcK5tw2IBYcFn1biPLgY1lRkru'),
-       (CURRENT_TIMESTAMP, 'user12', '$2a$12$Spmlztayjp6CVYQ65E5MuOHhAkYF8gdgJJ9Jh8WNn9Itmz848/XLC');
+       (CURRENT_TIMESTAMP, 'user1@gmail.com', '$2a$12$4HYLqYGKlN.cIZvGm3pxS.TIyRiWX.5lM6L2WtpJpMhGTkTqf8xcm'),
+       (CURRENT_TIMESTAMP, 'user2@gmail.com', '$2a$12$98l15u0mhiwNw9VP6yv2PuiL.i8Z47J10VhLa0USFPZSsGX4E8xTq'),
+       (CURRENT_TIMESTAMP, 'user3@gmail.com', '$2a$12$IPojbzKIETrpcjfX.VlEMeRn1Jyg9crOBjY9mMhqA0WLIs1wAqFF6'),
+       (CURRENT_TIMESTAMP, 'user4@gmail.com', '$2a$12$pbhnAh..V0FzEdlvvpYsFuYLDJbHtgmLw4rvMLj3wCc5UVvA.Om92'),
+       (CURRENT_TIMESTAMP, 'user5@gmail.com', '$2a$12$vjOkKhKMxkIzhxVA84yqkuDiiEhiMFBYNhqvv4EsXEzkf72LFD4l.'),
+       (CURRENT_TIMESTAMP, 'user6@gmail.com', '$2a$12$8Fy5tpIxqgsEtRvU9ye9sO7zZaXZA.siLsV/SZC1VQv3n6QlPxlxO'),
+       (CURRENT_TIMESTAMP, 'user7@gmail.com', '$2a$12$9JNjkbDRNUfStiD/0uKVxuPkMqhEOBbbKanUpwAngszmbindnMd7G'),
+       (CURRENT_TIMESTAMP, 'user8@gmail.com', '$2a$12$C0h3tmI9yDjKAk9dXdLm9OgGyrgXs1rAmIor9icV5lNi6f1iCLCZK'),
+       (CURRENT_TIMESTAMP, 'user9@gmail.com', '$2a$12$XuKgPqlpnTW17h4k3BXhH.MGKBf4qR9ZPwAmGqqAvM6SpDD4jberS'),
+       (CURRENT_TIMESTAMP, 'user10@gmail.com', '$2a$12$8Yr83XwZ3hMrQ8vMSpfFje1wCxO/7nnhG7xsjwL3OROWRXA1N1U4G'),
+       (CURRENT_TIMESTAMP, 'user11@gmail.com', '$2a$12$SzgFCH9BEyYDTHnKfpiriORbs0DLcK5tw2IBYcFn1biPLgY1lRkru'),
+       (CURRENT_TIMESTAMP, 'user12@gmail.com', '$2a$12$Spmlztayjp6CVYQ65E5MuOHhAkYF8gdgJJ9Jh8WNn9Itmz848/XLC');
 
 INSERT INTO users_roles (user_id, roles_id)
 VALUES (1, 2),

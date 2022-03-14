@@ -31,7 +31,7 @@ class UserSpec extends Specification implements UserFixture {
         !db.isEmpty()
     }
 
-    def 'Should receive specific error cause username need to be unique'() {
+    def 'Should receive specific error cause email need to be unique'() {
         given:
         def dto = createUserDto()
         def bindingResult = new BeanPropertyBindingResult(dto, 'createUserDto')
@@ -39,18 +39,18 @@ class UserSpec extends Specification implements UserFixture {
         when:
         userFacade.create(dto, bindingResult)
 
-        and: 'we try to create user with the same username as before'
+        and: 'we try to create user with the same email as before'
         userFacade.create(dto, bindingResult)
 
         then: 'binding result contains specific error'
-        bindingResult.getFieldError(ValidationConstants.Field.USERNAME).code == ValidationConstants.Error.USERNAME_TAKEN
+        bindingResult.getFieldError(ValidationConstants.Field.EMAIL).code == ValidationConstants.Error.EMAIL_TAKEN
     }
 
     def 'Should receive specific error cause password and re password do not match'() {
         given:
         def password = '12345!aA'
         def rePassword = '12345!bB'
-        def dto = createUserDto('john', password, rePassword)
+        def dto = createUserDto('john.doe@mail.com', password, rePassword)
         def bindingResult = new BeanPropertyBindingResult(dto, 'createUserDto')
 
         when:
@@ -62,9 +62,9 @@ class UserSpec extends Specification implements UserFixture {
 
     @Unroll
     def 'Should receive specific error cause some of fields are invalid'(field, expectedError,
-                                                                         username, password, rePassword) {
+                                                                         email, password, rePassword) {
         given:
-        def dto = createUserDto(username, password, rePassword)
+        def dto = createUserDto(email, password, rePassword)
         def bindingResult = new BeanPropertyBindingResult(dto, 'createUserDto')
 
         when: 'we try to create an user'
@@ -74,16 +74,44 @@ class UserSpec extends Specification implements UserFixture {
         bindingResult.getFieldError(field).code == expectedError
 
         where:
-        field                                 | expectedError                                     | username | password   | rePassword | _
-        ValidationConstants.Field.USERNAME    | ValidationConstants.Error.USERNAME_IS_REQUIRED    | null     | '12345Aa!' | '12345Aa!' | _
-        ValidationConstants.Field.PASSWORD    | ValidationConstants.Error.PASSWORD_IS_REQUIRED    | 'john'   | null       | '12345Aa!' | _
-        ValidationConstants.Field.RE_PASSWORD | ValidationConstants.Error.RE_PASSWORD_IS_REQUIRED | 'john'   | '12345Aa!' | null       | _
+        field                                 | expectedError                                     | email  | password   | rePassword | _
+        ValidationConstants.Field.EMAIL       | ValidationConstants.Error.EMAIL_IS_REQUIRED       | null   | '12345Aa!' | '12345Aa!' | _
+        ValidationConstants.Field.PASSWORD    | ValidationConstants.Error.PASSWORD_IS_REQUIRED    | 'john' | null       | '12345Aa!' | _
+        ValidationConstants.Field.RE_PASSWORD | ValidationConstants.Error.RE_PASSWORD_IS_REQUIRED | 'john' | '12345Aa!' | null       | _
+    }
+
+    @Unroll
+    def 'Should throw an exception cause email format = [#email]'(String email) {
+        given:
+        def dto = createUserDto(email)
+        def bindingResult = new BeanPropertyBindingResult(dto, 'createUserDto')
+
+        when: 'we try to create an user'
+        userFacade.create(dto, bindingResult)
+
+        then: 'binding result contains specific error'
+        bindingResult.getFieldError(ValidationConstants.Field.EMAIL).code == ValidationConstants.Error.EMAIL_WRONG_FORMAT
+
+        where:
+        email                          | _
+        'plainaddress'                 | _
+        '#@%^%#$@#$@#.com'             | _
+        '@domain.com'                  | _
+        'Joe Smith <email@domain.com>' | _
+        'email.domain.com'             | _
+        'email@domain@domain.com'      | _
+        '.email@domain.com'            | _
+        'email.@domain.com'            | _
+        'email..email@domain.com'      | _
+        'あいうえお@domain.com'             | _
+        'email@domain.com (Joe Smith)' | _
+        'email@domain'                 | _
     }
 
     @Unroll
     def 'Should receive specific error cause password is not safe = [#password]'(String password) {
         given:
-        def dto = createUserDto('john', password)
+        def dto = createUserDto('john.doe@gmail.com', password)
         def bindingResult = new BeanPropertyBindingResult(dto, 'createUserDto')
 
         when: 'we try to create user'
@@ -117,14 +145,14 @@ class UserSpec extends Specification implements UserFixture {
         def createUserDto = createUserDto()
         def oldPassword = createUserDto.password
         def newPassword = '12345!aB'
-        def command = createChangePasswordCommand(createUserDto.username, newPassword, newPassword)
+        def command = createChangePasswordCommand(createUserDto.email, newPassword, newPassword)
         userFacade.create(createUserDto, Mock(BindingResult))
 
         when:
         userFacade.changePassword(command, Mock(BindingResult))
 
         then:
-        def updatedUser = db.values().stream().filter(user -> user.username == createUserDto.username).findFirst().get()
+        def updatedUser = db.values().stream().filter(user -> user.email == createUserDto.email).findFirst().get()
         updatedUser.password != oldPassword
     }
 
