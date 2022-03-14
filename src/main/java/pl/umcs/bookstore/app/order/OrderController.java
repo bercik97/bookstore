@@ -43,6 +43,8 @@ class OrderController {
         User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
         model.addAttribute("orders", orderFacade.findAllByUserEmail(user.getUsername(), PageRequest.of(page, 10)));
         model.addAttribute("currentPage", page);
+        model.addAttribute("hasError", null);
+        model.addAttribute("paymentFinished", null);
         return "authenticated/my_orders";
     }
 

@@ -39,7 +39,7 @@ class OrderAdminController {
 
     @PostMapping("edit/status/{id}")
     public String editStatus(@ModelAttribute("updateOrderStatusDto") UpdateOrderStatusDto dto, @PathVariable long id) {
-        facade.updateStatus(UpdateOrderStatusCommand.of(id, dto));
+        facade.updateStatus(UpdateOrderStatusCommand.of(id, dto.getStatus()));
         return "redirect:/admin-panel/orders/edit/{id}";
     }
 

@@ -8,6 +8,18 @@
     <h3>Moje zamówienia</h3>
     <hr/>
 
+    <div th:if="${hasError != null} and ${paymentFinished} and !${hasError}" class="alert alert-success" role="alert">
+        Sukces!
+        <i class="glyphicon glyphicon-thumbs-up"></i>
+        Płatność zaakceptowana!
+    </div>
+
+    <div th:if="${hasError != null} and ${paymentFinished} and ${hasError}" class="alert alert-danger" role="alert">
+        Błąd płatności!
+        <i class="glyphicon glyphicon-thumbs-up"></i>
+        Coś poszło nie tak!
+    </div>
+
     <div th:if="${!orders.isEmpty()}">
         <table class="table">
             <thead>
@@ -27,6 +39,9 @@
                 <td th:text="${order.status}"></td>
                 <td>
                     <a th:href="@{/orders/me/{id}(id=${order.id})}" type="button" class="btn btn-info">Zobacz szczegóły</a>
+                    <form th:if="${order.status.name().equals('UNPAID')}" action="#" method="post" th:action="@{/payu/{id}(id=${order.id})}">
+                        <button type="submit" onclick="clicked(event, 'przejść do płatności zamówienia')" class="btn btn-success">Zapłać</button>
+                    </form>
                 </td>
             </tr>
             </tbody>

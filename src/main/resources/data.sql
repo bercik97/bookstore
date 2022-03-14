@@ -3,7 +3,7 @@ VALUES (CURRENT_TIMESTAMP, 'ROLE_USER'),
        (CURRENT_TIMESTAMP, 'ROLE_ADMIN');
 
 INSERT INTO users (created_date, username, password)
-VALUES (CURRENT_TIMESTAMP, 'admin', '$2a$12$co5TaHW5CeSho.QCTvV3oeDKjVlPYvz9zYIqLB7PBMXUMgQadp11i'),
+VALUES (CURRENT_TIMESTAMP, 'admin@gmail.com', '$2a$12$co5TaHW5CeSho.QCTvV3oeDKjVlPYvz9zYIqLB7PBMXUMgQadp11i'),
        (CURRENT_TIMESTAMP, 'user1', '$2a$12$4HYLqYGKlN.cIZvGm3pxS.TIyRiWX.5lM6L2WtpJpMhGTkTqf8xcm'),
        (CURRENT_TIMESTAMP, 'user2', '$2a$12$98l15u0mhiwNw9VP6yv2PuiL.i8Z47J10VhLa0USFPZSsGX4E8xTq'),
        (CURRENT_TIMESTAMP, 'user3', '$2a$12$IPojbzKIETrpcjfX.VlEMeRn1Jyg9crOBjY9mMhqA0WLIs1wAqFF6'),
@@ -34,27 +34,27 @@ VALUES (1, 2),
        (13, 1);
 
 INSERT INTO books (created_date, title, author, price)
-VALUES (CURRENT_TIMESTAMP, 'Steve Jobs bio', 'Walter Isaacson', 39.99),
-       (CURRENT_TIMESTAMP, 'Pan Tadeusz', 'Adam Mickiewicz', 12.94),
+VALUES (CURRENT_TIMESTAMP, 'Steve Jobs bio', 'Walter Isaacson', 39),
+       (CURRENT_TIMESTAMP, 'Pan Tadeusz', 'Adam Mickiewicz', 12),
        (CURRENT_TIMESTAMP, 'Java. Podstawy', 'Horstmann Cay S.', 99),
        (CURRENT_TIMESTAMP, 'Java. Techniki zaawansowane. Wydanie XI', 'Horstmann Cay S.', 110),
        (CURRENT_TIMESTAMP, 'Język C++. Szkoła programowania. Wydanie VI', 'Stephen Prata', 99),
-       (CURRENT_TIMESTAMP, 'Czysty kod. Podręcznik dobrego programisty', 'Robert C. Martin', 44.85),
-       (CURRENT_TIMESTAMP, 'Zielona Mila', 'Stephen King', 27.07),
-       (CURRENT_TIMESTAMP, 'Ślepnąc od świateł', 'Jakub Żulczyk', 24.06),
-       (CURRENT_TIMESTAMP, 'Bezpieczeństwo aplikacji webowych', 'Sekurak', 124.95),
-       (CURRENT_TIMESTAMP, 'Czarny łabędź', 'Nassim Nicholas Taleb', 30.37),
-       (CURRENT_TIMESTAMP, 'Standard Bitcoina', 'Ammous Saifedean', 36.52),
-       (CURRENT_TIMESTAMP, 'Blockchain. Podstawy technologii łańcucha bloków w 25 krokach', 'Drescher Daniel', 38.35),
+       (CURRENT_TIMESTAMP, 'Czysty kod. Podręcznik dobrego programisty', 'Robert C. Martin', 44),
+       (CURRENT_TIMESTAMP, 'Zielona Mila', 'Stephen King', 27),
+       (CURRENT_TIMESTAMP, 'Ślepnąc od świateł', 'Jakub Żulczyk', 24),
+       (CURRENT_TIMESTAMP, 'Bezpieczeństwo aplikacji webowych', 'Sekurak', 124),
+       (CURRENT_TIMESTAMP, 'Czarny łabędź', 'Nassim Nicholas Taleb', 30),
+       (CURRENT_TIMESTAMP, 'Standard Bitcoina', 'Ammous Saifedean', 36),
+       (CURRENT_TIMESTAMP, 'Blockchain. Podstawy technologii łańcucha bloków w 25 krokach', 'Drescher Daniel', 38),
        (CURRENT_TIMESTAMP, 'Labirynty Scruma', 'Jacek Wieczorek', 39),
-       (CURRENT_TIMESTAMP, 'W głowie twórcy Bitcoina', 'Feniks', 69.99),
-       (CURRENT_TIMESTAMP, 'Spring Framework. Wprowadzenie do tworzenia aplikacji', 'Sharma J. ,Sarin Ashish', 44.85);
+       (CURRENT_TIMESTAMP, 'W głowie twórcy Bitcoina', 'Feniks', 69),
+       (CURRENT_TIMESTAMP, 'Spring Framework. Wprowadzenie do tworzenia aplikacji', 'Sharma J. ,Sarin Ashish', 44);
 
 INSERT INTO orders (created_date, status, user_email)
-VALUES (CURRENT_TIMESTAMP, 'UNPAID', 'admin'),
-       (CURRENT_TIMESTAMP, 'PAID', 'admin'),
-       (CURRENT_TIMESTAMP, 'ON_THE_WAY', 'admin'),
-       (CURRENT_TIMESTAMP, 'DELIVERED', 'admin');
+VALUES (CURRENT_TIMESTAMP, 'UNPAID', 'admin@gmail.com'),
+       (CURRENT_TIMESTAMP, 'PAID', 'admin@gmail.com'),
+       (CURRENT_TIMESTAMP, 'ON_THE_WAY', 'admin@gmail.com'),
+       (CURRENT_TIMESTAMP, 'DELIVERED', 'admin@gmail.com');
 
 INSERT INTO orders_books (order_id, books_id)
 VALUES (1, 1),

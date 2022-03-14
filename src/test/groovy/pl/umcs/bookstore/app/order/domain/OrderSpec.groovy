@@ -2,7 +2,6 @@ package pl.umcs.bookstore.app.order.domain
 
 import org.springframework.data.domain.Pageable
 import pl.umcs.bookstore.app.order.domain.command.UpdateOrderStatusCommand
-import pl.umcs.bookstore.app.order.domain.dto.UpdateOrderStatusDto
 import spock.lang.Specification
 
 import java.util.concurrent.ConcurrentHashMap
@@ -103,7 +102,7 @@ class OrderSpec extends Specification implements OrderFixture {
         db.put(orderId, order)
 
         when:
-        orderFacade.updateStatus(UpdateOrderStatusCommand.of(orderId, new UpdateOrderStatusDto(newStatus)))
+        orderFacade.updateStatus(UpdateOrderStatusCommand.of(orderId, newStatus))
 
         then:
         def updatedOrder = db.get(orderId)
