@@ -17,10 +17,4 @@ spring:
       mode: always
 
 payu:
-  continueUrl: http://localhost:8080/payu/callback
-  description: Sklep z książkami
-  clientId: 145227
-  clientSecret: 12f071174cb7eb79d4aac5bc2f07563f
-  authorizationUri: https://secure.payu.com/pl/standard/user/oauth/authorize
-  merchantPosId: 145227
-  orderUrl: https://secure.payu.com/api/v2_1/orders
+  enabled: false

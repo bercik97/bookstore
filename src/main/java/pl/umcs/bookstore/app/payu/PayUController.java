@@ -1,6 +1,7 @@
 package pl.umcs.bookstore.app.payu;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,27 +32,36 @@ class PayUController {
     private final PayUAPIService service;
     private final OrderFacade orderFacade;
 
+    @Value("#{new Boolean('${payu.enabled}')}")
+    private Boolean isPayuEnabled;
+
     private static final String SUCCESS_STATUS_CODE = "SUCCESS";
 
     @PostMapping("{id}")
-    public RedirectView makePayment(@PathVariable long id, Authentication authentication, HttpSession httpSession, HttpServletRequest request) {
+    public Object makePayment(@PathVariable long id, Authentication authentication, HttpSession httpSession, HttpServletRequest request) {
         OrderDetailsDto order = orderFacade.findById(id);
         User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
+        httpSession.setAttribute("orderId", id);
+        if (!isPayuEnabled) {
+            updateStatus(httpSession);
+            return "redirect:/orders/me";
+        }
         PayUOrderResponse response = service.makePayment(CreatePayUPaymentCommand.of(order, user.getEmail(), request));
         if (!SUCCESS_STATUS_CODE.equals(response.getStatus().getStatusCode())) {
             throw new RuntimeException("Something went wrong while making payment!");
         }
-        httpSession.setAttribute("orderId", id);
         return new RedirectView(response.getRedirectUri());
     }
 
     @GetMapping("/callback")
     public String handlePaymentCallback(@RequestParam Optional<String> error, HttpSession httpSession) {
-        error.ifPresentOrElse(System.out::println, () -> {
-            long orderId = (long) httpSession.getAttribute("orderId");
-            httpSession.removeAttribute("orderId");
-            orderFacade.updateStatus(UpdateOrderStatusCommand.of(orderId, OrderStatus.PAID));
-        });
+        error.ifPresentOrElse(System.out::println, () -> updateStatus(httpSession));
         return "redirect:/orders/me";
+    }
+
+    private void updateStatus(HttpSession httpSession) {
+        long orderId = (long) httpSession.getAttribute("orderId");
+        httpSession.removeAttribute("orderId");
+        orderFacade.updateStatus(UpdateOrderStatusCommand.of(orderId, OrderStatus.PAID));
     }
 }

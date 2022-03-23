@@ -25,3 +25,4 @@
 
 - baza danych postgres: jdbc:postgresql://localhost:5432/bookstore (email: postgres) (password: admin)
 - tabele oraz dane dodają się automatycznie przy starcie aplikacji
+- admina (admin@gmail.com : admin)

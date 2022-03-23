@@ -1,0 +1,27 @@
+spring:
+
+  datasource:
+    url: ${DATABASE_URL}
+    username: postgres
+    password: admin
+    driverClassName: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddlAuto: create-drop
+    openInView: false
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+
+payu:
+  enabled: true
+  continueUrl: ${PAYU_CONTINUE_URL}
+  description: Sklep z książkami
+  clientId: ${PAYU_CLIENT_ID}
+  clientSecret: ${PAYU_CLIENT_SECRET_ID}
+  authorizationUri: ${PAYU_AUTHORIZATION_URI}
+  merchantPosId: ${PAYU_MERCHANT_POS_ID}
+  orderUrl: ${PAYU_ORDER_URL}
